@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Engine, Render, Bodies, World, Events, Body, Vector, Composite, Common } from 'matter-js';
+import { Engine, Render, Bodies, World, Events, Body, Common } from 'matter-js';
 
 // Constants for language blocks
 const LANGUAGE_BLOCK_CONSTANTS = {
@@ -23,9 +23,8 @@ const LanguageCanvasAnimation = () => {
   const engine = useRef(Engine.create());
   const render = useRef<Matter.Render | null>(null);
   const frameId = useRef<number | null>(null);
-  const updateCount = useRef(0); // Ref to track engine updates
   const particles = useRef<Matter.Body[]>([]);
-  const colors = ['#FF6138', '#FFBE53', '#2980B9', '#282741', '#000000'];
+  const colors = ['transparent', '#000000','transparent'];
   const currentColorIndex = useRef(0);
 
   const getNextColor = () => {
@@ -49,6 +48,8 @@ const LanguageCanvasAnimation = () => {
       density: LANGUAGE_BLOCK_CONSTANTS.PARTICLE_DENSITY,
       render: {
         fillStyle: color,
+        strokeStyle: '#000000', // Black border
+        lineWidth: 1, // Border thickness
       },
       label: label, // Store label in the body itself
     });
@@ -133,31 +134,30 @@ const LanguageCanvasAnimation = () => {
     // Custom rendering for text labels
     const context = render.current.context;
     Events.on(render.current, 'afterRender', () => {
-      if (updateCount.current > 30) { // Only draw text after 30 updates
-        particles.current.forEach(particle => {
-          const label = (particle as any).label;
-          const textColor = particle.render.fillStyle === '#000000' ? '#FFFFFF' : '#000000';
+       particles.current.forEach(particle => {
+         if (particle.position.y > window.innerHeight * 0.3) {
+           const label = (particle as any).label;
+           const textColor = particle.render.fillStyle === '#000000' ? '#FFFFFF' : '#000000';
 
-          context.save(); // Save the current context state
-          context.translate(particle.position.x, particle.position.y); // Translate to the particle's center
-          context.rotate(particle.angle); // Rotate by the particle's angle
+           context.save(); // Save the current context state
+           context.translate(particle.position.x, particle.position.y); // Translate to the particle's center
+           context.rotate(particle.angle); // Rotate by the particle's angle
 
-          context.font = '18px Arial'; // Set font properties after transformations
-          context.textAlign = 'center';
-          context.textBaseline = 'middle';
-          context.fillStyle = textColor;
+           context.font = '18px Arial'; // Set font properties after transformations
+           context.textAlign = 'center';
+           context.textBaseline = 'middle';
+           context.fillStyle = textColor;
 
-          context.fillText(label, 0, 0); // Draw text at the new origin (particle's center)
+           context.fillText(label, 0, 0); // Draw text at the new origin (particle's center)
 
-          context.restore(); // Restore the context state
-        });
-      }
+           context.restore(); // Restore the context state
+         }
+       });
     });
 
     // Animation loop
     const step = () => {
       Engine.update(engine.current, 1000 / 60); // 60 FPS for smoother animation
-      updateCount.current++; // Increment update count
       frameId.current = requestAnimationFrame(step);
     };
 
@@ -206,12 +206,8 @@ const LanguageCanvasAnimation = () => {
     isPressed.current = true;
   };
 
-  const handleUp = () => {
-    isPressed.current = false;
-  };
-
   const handleAddCircle = (e: React.MouseEvent) => {
-    if (isPressed.current && engine.current && scene.current) {
+    if (engine.current && scene.current) {
       // Adjust mouse coordinates to canvas
       const rect = scene.current.getBoundingClientRect();
       const canvasX = e.clientX - rect.left;
@@ -231,14 +227,14 @@ const LanguageCanvasAnimation = () => {
           World.remove(engine.current.world, oldestParticle);
         }
       }
+      isPressed.current = false; // Reset isPressed after adding block
     }
   };
 
   return (
     <div
       onMouseDown={handleDown}
-      onMouseUp={handleUp}
-      onMouseMove={handleAddCircle}
+      onMouseUp={handleAddCircle}
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}
     >
       <div ref={scene} style={{ width: '100%', height: '100%' }} />
