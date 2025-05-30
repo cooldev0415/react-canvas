@@ -1,8 +1,11 @@
 import CanvasAnimation from './components/CanvasAnimation'
+import LanguageCanvasAnimation from './components/LanguageCanvasAnimation'
 
 function App() {
   return (
-    <CanvasAnimation />
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <LanguageCanvasAnimation />
+    </div>
   )
 }
 
