@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import './CanvasAnimation.css';
 
 interface CircleProps {
   x: number;
@@ -55,10 +54,10 @@ class Circle {
 const CanvasAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animations = useRef<gsap.core.Tween[]>([]);
-  const bgColor = useRef("#FF6138");
+  const bgColor = useRef("#FFBE53");
 
   const colorPicker = {
-    colors: ["#FF6138", "#FFBE53", "#2980B9", "#282741"],
+    colors: ["#FFBE53", "#2980B9", "#282741"],
     index: 0,
     next() {
       this.index = this.index++ < this.colors.length - 1 ? this.index : 0;
