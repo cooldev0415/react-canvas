@@ -1,13 +1,15 @@
 import CanvasAnimation from './components/CanvasAnimation'
 import LanguageCanvasAnimation from './components/LanguageCanvasAnimation'
 import { Logo } from './components/Logo'
+import { DockMenu } from './components/dock-menu'
 
 function App() {
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div className='app-container'>
       <Logo />
       <CanvasAnimation />
       <LanguageCanvasAnimation />
+      <DockMenu />
     </div>
   )
 }

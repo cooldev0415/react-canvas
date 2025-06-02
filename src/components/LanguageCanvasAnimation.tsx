@@ -14,7 +14,7 @@ const LANGUAGE_BLOCK_CONSTANTS = {
   PARTICLE_VELOCITY: { MIN: -0.2, MAX: 0.2 },
   COLLISION_DAMPING: 0.9,
   MAX_PARTICLES: 60,
-  LABELS:  ["Interactive Designs","Journey Maps","Look Book","Prototypes","Wireframes","Collateral","UI Designs","Surveys","Communications","Illustration Services","Stakeholder Meetings","Analytics","Usability Testing","Booth","Database Management","Pitch Decks","Presentations","OOH","Brand Archetypes","Marketing Strategy","QA","API Development","Customer Experience","eCommerce","Web","CRM Integrations","Social Media","Web","Strategic Marketing","Social Media Assets","Custom Websites","Mobile Applications","UI/UX","Intranets","Moodboards","Blitz","Investor Portals","Launch","Print/Digital Adverts","SEO","Advertising","Logos","Infographics","PPC","Content Development","Personas","UI Design","Visual Design","Interaction Design","Brand Strategy","Brand Identity","Branding","Empathy Maps"]
+  LABELS: ["Interactive Designs", "Journey Maps", "Look Book", "Prototypes", "Wireframes", "Collateral", "UI Designs", "Surveys", "Communications", "Illustration Services", "Stakeholder Meetings", "Analytics", "Usability Testing", "Booth", "Database Management", "Pitch Decks", "Presentations", "OOH", "Brand Archetypes", "Marketing Strategy", "QA", "API Development", "Customer Experience", "eCommerce", "Web", "CRM Integrations", "Social Media", "Web", "Strategic Marketing", "Social Media Assets", "Custom Websites", "Mobile Applications", "UI/UX", "Intranets", "Moodboards", "Blitz", "Investor Portals", "Launch", "Print/Digital Adverts", "SEO", "Advertising", "Logos", "Infographics", "PPC", "Content Development", "Personas", "UI Design", "Visual Design", "Interaction Design", "Brand Strategy", "Brand Identity", "Branding", "Empathy Maps"]
 };
 
 const LanguageCanvasAnimation: React.FC = () => {
@@ -94,11 +94,21 @@ const LanguageCanvasAnimation: React.FC = () => {
       });
       render.current = createdRender;
 
+      const dockHeight = 70;
+      const dockWidth = 240;
+      const dockWall = Bodies.rectangle(
+        cw / 2,
+        ch - dockHeight / 2,
+        dockWidth,
+        dockHeight,
+        { isStatic: true, render: { fillStyle: 'transparent' } }
+      )
       const walls = [
         Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: 'transparent' } }),
+        dockWall
       ];
 
       World.add(engine.current.world, walls);
@@ -217,13 +227,14 @@ const LanguageCanvasAnimation: React.FC = () => {
 
   return (
     <div
-      onMouseDown={handleDown}
-      onMouseUp={handleAddCircle}
-    style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}
-  >
-    <div ref={scene} style={{ width: '100%', height: '100%' }} />
-  </div>
-);
+      // onMouseDown={handleDown}
+      onMouseDown={handleAddCircle}
+      // onMouseUp={handleAddCircle}
+      style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}
+    >
+      <div ref={scene} style={{ width: '100%', height: '100%' }} />
+    </div>
+  );
 };
 
 export default LanguageCanvasAnimation;
