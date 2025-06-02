@@ -198,9 +198,9 @@ const LanguageCanvasAnimation: React.FC = () => {
     };
   }, []);
 
-  const handleDown = () => {
-    isPressed.current = true;
-  };
+  // const handleDown = () => {
+  //   isPressed.current = true;
+  // };
 
   const handleAddCircle = (e: React.MouseEvent) => {
     if (engine.current && scene.current) {
