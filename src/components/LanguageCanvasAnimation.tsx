@@ -14,7 +14,38 @@ const LANGUAGE_BLOCK_CONSTANTS = {
   PARTICLE_VELOCITY: { MIN: -0.2, MAX: 0.2 },
   COLLISION_DAMPING: 0.9,
   MAX_PARTICLES: 60,
-  LABELS: ["Interactive Designs", "Journey Maps", "Look Book", "Prototypes", "Wireframes", "Collateral", "UI Designs", "Surveys", "Communications", "Illustration Services", "Stakeholder Meetings", "Analytics", "Usability Testing", "Booth", "Database Management", "Pitch Decks", "Presentations", "OOH", "Brand Archetypes", "Marketing Strategy", "QA", "API Development", "Customer Experience", "eCommerce", "Web", "CRM Integrations", "Social Media", "Web", "Strategic Marketing", "Social Media Assets", "Custom Websites", "Mobile Applications", "UI/UX", "Intranets", "Moodboards", "Blitz", "Investor Portals", "Launch", "Print/Digital Adverts", "SEO", "Advertising", "Logos", "Infographics", "PPC", "Content Development", "Personas", "UI Design", "Visual Design", "Interaction Design", "Brand Strategy", "Brand Identity", "Branding", "Empathy Maps"]
+  LABELS: [
+    "Frontend Development",
+    "Backend Development",
+    "Full Stack Projects",
+    "JavaScript Frameworks",
+    "Server-Side Technologies",
+    "Databases",
+    "API Development",
+    "Cloud Services",
+    "DevOps",
+    "Version Control",
+    "Performance Optimization",
+    "Security Best Practices",
+    "Responsive Design",
+    "Cross-Browser",
+    "Testing",
+    "QA",
+    "Portfolio Projects",
+    "Technical Writing",
+    // New Additions
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Node.js",
+    "Laravel",
+    "Ruby",
+    "Rails",
+    "PHP",
+    "WordPress",
+    "MUI (Material-UI)",
+    "Chakra UI"
+  ]
 };
 
 const LanguageCanvasAnimation: React.FC = () => {
@@ -108,7 +139,7 @@ const LanguageCanvasAnimation: React.FC = () => {
         Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: 'transparent' } }),
-        dockWall
+        // dockWall
       ];
 
       World.add(engine.current.world, walls);

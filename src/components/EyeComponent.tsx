@@ -125,7 +125,7 @@ const FunnySmileFace = () => {
         fill="#000"
       >
         <textPath href="#smilePath" startOffset="10%">
-          LET'S CREATE SOMETHING AWESOME
+          FULLSTACK ENGINEER: JOSEPH LINGAD
         </textPath>
       </text>
     </svg>
