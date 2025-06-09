@@ -125,15 +125,15 @@ const LanguageCanvasAnimation: React.FC = () => {
       });
       render.current = createdRender;
 
-      const dockHeight = 70;
-      const dockWidth = 240;
-      const dockWall = Bodies.rectangle(
-        cw / 2,
-        ch - dockHeight / 2,
-        dockWidth,
-        dockHeight,
-        { isStatic: true, render: { fillStyle: 'transparent' } }
-      )
+      // const dockHeight = 70;
+      // const dockWidth = 240;
+      // const dockWall = Bodies.rectangle(
+      //   cw / 2,
+      //   ch - dockHeight / 2,
+      //   dockWidth,
+      //   dockHeight,
+      //   { isStatic: true, render: { fillStyle: 'transparent' } }
+      // )
       const walls = [
         Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true, render: { fillStyle: 'transparent' } }),
         Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: 'transparent' } }),
